@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  test-db:
+    image: "postgres:15.4-alpine"
+    container_name: limeapi_test_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-testdb}
+      POSTGRES_USER: ${DB_USERNAME:-testuser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-testpass}
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
